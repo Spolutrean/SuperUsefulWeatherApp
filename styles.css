@@ -1,0 +1,101 @@
+html {
+    display:flex;
+    flex-direction:column;
+    width: 100vw;
+}
+
+body {
+    align-self: center;
+    min-height:100vh;
+
+    min-width: 320px;
+    max-width: 800px;
+    width: 50vw;
+
+    border: 2px solid black;
+}
+
+.section {
+    margin: 2em 1.2em;
+}
+
+.titleSection {
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+}
+
+.weatherHereTitle {
+    width: 33%;
+    margin: 0;
+    align-self: center;
+}
+
+.updateGeolocationButton {
+    width: 33%;
+    border-radius: 10px;
+    height: 4em;
+    align-self: center;
+}
+
+.mainCitySection {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+.mainCityDescription {
+    width: 45%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.mainCityShortDescription {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between
+}
+
+.mainCityImage {
+    width: 96px; height: 96px
+}
+
+.mainCityDegrees {
+    font-size: 96px
+}
+
+.mainCityName {
+    font-size: 2em;
+}
+
+.weatherDescription {
+    width: 45%;
+    margin: 0;
+    padding: 0;
+}
+
+.weatherDescription li {
+    list-style-type: none;
+    background-color: aquamarine;
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    margin: 0.5em 0;
+    padding: 0.5em 0;
+}
+
+.weatherDescription li :first-child {
+    padding-left: 0.4em;
+}
+
+.weatherDescription li :last-child {
+    padding-right: 0.4em;
+}
+
+
+
+button {
+    border: unset;
+}
