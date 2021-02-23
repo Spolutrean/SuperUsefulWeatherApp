@@ -8,33 +8,32 @@
 html {
     display:flex;
     flex-direction:column;
-    width: 100vw;
 }
 
 body {
     align-self: center;
     min-height:100vh;
 
-    min-width: 320px;
-    max-width: 800px;
-    width: 50vw;
+    max-width: 1200px;
+    min-width: 730px;
 
-    border: 2px solid black;
+    border: 2px solid var(--dark-primary-color);
 }
 
 .section {
-    margin: 2em 1.2em;
+    margin: 1.2em 1.2em;
 }
 
 .titleSection {
-    width: 100%;
     display: flex;
+    align-items: center;
 }
 
 .weatherHereTitle {
     width: 33%;
     margin: 0;
     align-self: center;
+    color: var(--dark-primary-color);
 }
 
 .updateGeolocationButton {
@@ -45,12 +44,24 @@ body {
     align-self: center;
     background-color: var(--primary-color);
     color: var(--dark-primary-color);
+}
 
+.updateGeolocationButtonSmall {
+    display: none;
+    width: 32px;
+    height: 32px;
+    align-self: center;
+    background-color: var(--primary-color);
+    color: var(--dark-primary-color);
+    font-weight: 900;
+    border-radius: 5px;
+    font-size: 1em;
 }
 
 .mainCitySection {
     display: flex;
     justify-content: space-between;
+    flex-wrap: wrap;
 }
 
 .mainCityDescription {
@@ -62,7 +73,8 @@ body {
 
 .mainCityShortDescription {
     display: flex;
-    justify-content: space-between
+    justify-content: space-between;
+    align-items: center;
 }
 
 .mainCityImage {
@@ -80,6 +92,7 @@ body {
     font-size: 2em;
     margin: 0;
     font-family: 'Roboto', sans-serif;
+    color: var(--dark-primary-color);
 }
 
 .weatherDescription {
@@ -112,12 +125,14 @@ body {
 .favouritesSection {
     display: flex;
     justify-content: space-between;
+    flex-wrap: wrap;
 }
 
 .favouritesTitle {
     margin: 0;
     padding: 0;
     font-size: 2em;
+    color: var(--dark-primary-color);
 }
 
 .addNewCitySection {
@@ -142,7 +157,7 @@ body {
 .addNewCityButton {
     width: 32px;
     height: 32px;
-    margin: 0 5px;
+    margin-left: 5px;
     border-radius: 50%;
     font-size: 1.5em;
     color: white;
@@ -198,6 +213,56 @@ body {
     color: white;
     background-color: var(--dark-primary-color);
 }
+
+@media screen and (max-width: 730px) {
+    body {
+        min-width: 320px;
+    }
+
+    .weatherHereTitle {
+        width: 60%;
+    }
+    .updateGeolocationButton {
+        display: none;
+    }
+    .updateGeolocationButtonSmall {
+        display: block;
+    }
+
+    .mainCityDescription {
+        width: 100%;
+        margin-bottom: 1em;
+    }
+    .mainCityShortDescription {
+        margin: 1em 0;
+    }
+    .mainCityDegrees {
+        font-size: 72px;
+    }
+
+    .weatherDescription {
+        width: 100%;
+    }
+
+    .cityCard {
+        width: 100%;
+    }
+
+    .favouritesTitle {
+        margin-bottom: 0.3em;
+    }
+    .addNewCitySection {
+        width: 100%;
+        justify-content: space-between;
+    }
+    .addNewCityField {
+        width: 80%;
+    }
+    .addNewCityButton {
+        margin: 0;
+    }
+}
+
 
 
 button {
