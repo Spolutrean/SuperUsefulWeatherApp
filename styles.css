@@ -1,3 +1,10 @@
+:root {
+    /*gray*/
+    --primary-color: #a7afb1;
+    --dark-primary-color: #4f6166;
+    --light-primary-color: #f1f1f1;
+}
+
 html {
     display:flex;
     flex-direction:column;
@@ -22,7 +29,6 @@ body {
 .titleSection {
     width: 100%;
     display: flex;
-    flex-direction: row;
 }
 
 .weatherHereTitle {
@@ -33,14 +39,17 @@ body {
 
 .updateGeolocationButton {
     width: 33%;
+    height: 3em;
     border-radius: 10px;
-    height: 4em;
+    font-size: 1em;
     align-self: center;
+    background-color: var(--primary-color);
+    color: var(--dark-primary-color);
+
 }
 
 .mainCitySection {
     display: flex;
-    flex-direction: row;
     justify-content: space-between;
 }
 
@@ -53,20 +62,24 @@ body {
 
 .mainCityShortDescription {
     display: flex;
-    flex-direction: row;
     justify-content: space-between
 }
 
 .mainCityImage {
-    width: 96px; height: 96px
+    width: 96px;
+    height: 96px
 }
 
 .mainCityDegrees {
-    font-size: 96px
+    font-size: 96px;
+    color: gray;
+    font-family: 'Roboto', sans-serif;
 }
 
 .mainCityName {
     font-size: 2em;
+    margin: 0;
+    font-family: 'Roboto', sans-serif;
 }
 
 .weatherDescription {
@@ -77,10 +90,9 @@ body {
 
 .weatherDescription li {
     list-style-type: none;
-    background-color: aquamarine;
+    background-color: var(--primary-color);
     width: 100%;
     display: flex;
-    flex-direction: row;
     justify-content: space-between;
     margin: 0.5em 0;
     padding: 0.5em 0;
@@ -88,12 +100,104 @@ body {
 
 .weatherDescription li :first-child {
     padding-left: 0.4em;
+    color: white;
+    font-family: 'Roboto', sans-serif;
 }
 
 .weatherDescription li :last-child {
     padding-right: 0.4em;
+    color: white;
 }
 
+.favouritesSection {
+    display: flex;
+    justify-content: space-between;
+}
+
+.favouritesTitle {
+    margin: 0;
+    padding: 0;
+    font-size: 2em;
+}
+
+.addNewCitySection {
+    width: 45%;
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+}
+
+.addNewCityField {
+    width: 70%;
+    height: 1.3em;
+    font-size: 1.5em;
+    border: none;
+    background: var(--light-primary-color);
+}
+
+.addNewCityField::placeholder {
+    color: var(--primary-color);
+}
+
+.addNewCityButton {
+    width: 32px;
+    height: 32px;
+    margin: 0 5px;
+    border-radius: 50%;
+    font-size: 1.5em;
+    color: white;
+    background-color: var(--dark-primary-color);
+}
+
+.citiesSection {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+}
+
+.cityCard {
+    width: 45%;
+    margin-bottom: 1.5em;
+}
+
+.cityCard ul {
+    width: 100%;
+}
+
+.cityDescription {
+    display: flex;
+    align-items: center;
+}
+
+.cityName {
+    margin: 0;
+    padding: 0;
+    color: var(--dark-primary-color);
+    font-family: 'Roboto', sans-serif;
+}
+
+.cityDegrees {
+    margin: 0 1em;
+    font-size: 1.7em;
+    color: gray;
+    font-family: 'Roboto', sans-serif;
+}
+
+.cityImage {
+    width: 32px;
+    height: 32px;
+}
+
+.closeCitySectionButton {
+    margin-left: auto;
+    width: 32px;
+    height: 32px;
+    /*margin: 0 5px;*/
+    border-radius: 50%;
+    font-size: 1.5em;
+    color: white;
+    background-color: var(--dark-primary-color);
+}
 
 
 button {
