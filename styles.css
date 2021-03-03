@@ -162,6 +162,7 @@ body {
     font-size: 1.5em;
     color: white;
     background-color: var(--dark-primary-color);
+    display: flex;
 }
 
 .citiesSection {
@@ -212,6 +213,9 @@ body {
     font-size: 1.5em;
     color: white;
     background-color: var(--dark-primary-color);
+    display: flex;
+    justify-content: center;
+    align-content: center;
 }
 
 @media screen and (max-width: 730px) {
