@@ -16,8 +16,11 @@ body {
 
     max-width: 1200px;
     min-width: 730px;
+}
 
-    border: 2px solid var(--dark-primary-color);
+main {
+    width: 100%;
+    height: 100%;
 }
 
 .section {
@@ -167,10 +170,11 @@ body {
     justify-content: center;
 }
 
-.citiesSection {
+.cities {
     display: flex;
     flex-wrap: wrap;
     justify-content: space-between;
+    padding: 0;
 }
 
 .cityCard {
