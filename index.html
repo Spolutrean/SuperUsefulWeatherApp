@@ -55,36 +55,41 @@
     </section>
     <section class="section">
         <ul class="cities"></ul>
-        <div class="skeleton">
-            <div class="cityCard">
-                <section class="cityDescription">
-                    <h3 class="cityName"></h3>
-                    <span class="cityDegrees"></span>
-                    <img class="cityImage">
-                    <button class="closeCitySectionButton">&#10005</button>
-                </section>
-                <ul class="weatherDescription">
-                    <li>
-                        <span>Windy</span>
-                        <span></span>
-                    </li>
-                    <li>
-                        <span>Cloudiness</span>
-                        <span></span></li>
-                    <li>
-                        <span>Pressure</span>
-                        <span></span></li>
-                    <li>
-                        <span>Humidity</span>
-                        <span></span></li>
-                    <li>
-                        <span>Coordinates</span>
-                        <span></span></li>
-                </ul>
-            </div>
-        </div>
     </section>
 </main>
+<template id="templates">
+    <div class="cityCard loading">
+        <section class="loadingScreen">
+            <div class="loader">Loading...</div>
+        </section>
+        <section class="loadedContent">
+            <section class="cityDescription">
+                <h3 class="cityName"></h3>
+                <span class="cityDegrees"></span>
+                <img class="cityImage">
+                <button class="closeCitySectionButton">&#10005</button>
+            </section>
+            <ul class="weatherDescription">
+                <li>
+                    <span>Windy</span>
+                    <span></span>
+                </li>
+                <li>
+                    <span>Cloudiness</span>
+                    <span></span></li>
+                <li>
+                    <span>Pressure</span>
+                    <span></span></li>
+                <li>
+                    <span>Humidity</span>
+                    <span></span></li>
+                <li>
+                    <span>Coordinates</span>
+                    <span></span></li>
+            </ul>
+        </section>
+    </div>
+</template>
 <script src="main.js"></script>
 </body>
 </html>

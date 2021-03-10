@@ -12,7 +12,6 @@ html {
 
 body {
     align-self: center;
-    min-height:100vh;
 
     max-width: 1200px;
     min-width: 730px;
@@ -185,9 +184,10 @@ main {
 .cityCard {
     width: 45%;
     margin-bottom: 1.5em;
+    position: relative;
 }
 
-.cityCard ul {
+.cityCard .loadedContent ul {
     width: 100%;
 }
 
@@ -285,7 +285,7 @@ button {
 }
 
 
-.skeleton {
+.template {
     display: none;
 }
 

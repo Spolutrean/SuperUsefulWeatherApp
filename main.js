@@ -46,14 +46,31 @@ function UpdateGeolocation() {
 UpdateGeolocation();
 
 
-document.querySelector(".updateGeolocationButton").addEventListener("click", function () {
-    UpdateGeolocation();
-});
-document.querySelector(".updateGeolocationButtonSmall").addEventListener("click", function () {
-    UpdateGeolocation();
-});
+document.querySelector(".updateGeolocationButton").addEventListener("click", UpdateGeolocation);
+document.querySelector(".updateGeolocationButtonSmall").addEventListener("click", UpdateGeolocation);
 
-function AddCityCardByName(cityName) {
-    let newCityContainer = document.querySelector(".skeleton .cityCard").cloneNode();
+const inputField = document.querySelector(".addNewCityField");
+const addNewCityButton = document.querySelector(".addNewCityButton");
+const form = document.querySelector(".addNewCitySection");
+const cities = document.querySelector(".cities");
+
+function AddCity(cityName) {
+    if(cityName.length === 0) return;
+
+    let newCityContainer = document.querySelector("#templates").content.querySelector(".cityCard").cloneNode(true);
+    newCityContainer.querySelector(".closeCitySectionButton").addEventListener("click",
+        () => { cities.removeChild(newCityContainer); });
     newCityContainer.classList.add("loading");
+    cities.appendChild(newCityContainer);
+    HandleWeatherRequestByCity(cityName, weather => { UpdateCity(newCityContainer, weather) });
 }
+
+addNewCityButton.addEventListener("click", () => {
+    AddCity(inputField.value);
+    inputField.value = "";
+});
+form.addEventListener("submit", e => {
+    e.preventDefault();
+    AddCity(inputField.value);
+    inputField.value = "";
+});
