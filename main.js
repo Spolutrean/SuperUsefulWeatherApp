@@ -18,22 +18,23 @@ function HandleWeatherRequestByCoordinates(latitude, longitude, handler) {
     HandleWeatherRequest(`https://api.openweathermap.org/data/2.5/weather?units=metric&lat=${latitude}&lon=${longitude}&appid=${APIkey}`, handler);
 }
 
-function UpdateMainCity(weather) {
-    let mainCityContainer = document.querySelector(".mainCitySection");
-    mainCityContainer.querySelector(".mainCityName").innerHTML = weather.name;
-    mainCityContainer.querySelector(".mainCityDegrees").innerHTML = `${weather.main.temp} &#176;C`;
+function UpdateCity(container, weather) {
+    container.querySelector(".cityName").innerHTML = weather.name;
+    container.querySelector(".cityDegrees").innerHTML = `${Math.ceil(weather.main.temp)} &#176;C`;
+    container.querySelector(".cityImage").src = `http://openweathermap.org/img/wn/${weather.weather[0].icon}@4x.png`;
 
-    let weatherDescription = mainCityContainer.querySelector(".weatherDescription");
-
-
+    let weatherDescription = container.querySelector(".weatherDescription");
     weatherDescription.children[0].children[1].innerHTML = `${weather.wind.speed} m/s`;
     weatherDescription.children[1].children[1].innerHTML = weather.weather[0].description;
     weatherDescription.children[2].children[1].innerHTML = `${weather.main.pressure} hpa`;
     weatherDescription.children[3].children[1].innerHTML = `${weather.main.humidity}%`;
     weatherDescription.children[4].children[1].innerHTML = `[${weather.coord.lon}, ${weather.coord.lat}]`;
 
+    container.classList.remove("loading");
+}
 
-    console.log(weather);
+function UpdateMainCity(weather) {
+    UpdateCity(document.querySelector(".mainCitySection"), weather);
 }
 
 function UpdateGeolocation() {
@@ -43,3 +44,16 @@ function UpdateGeolocation() {
 }
 
 UpdateGeolocation();
+
+
+document.querySelector(".updateGeolocationButton").addEventListener("click", function () {
+    UpdateGeolocation();
+});
+document.querySelector(".updateGeolocationButtonSmall").addEventListener("click", function () {
+    UpdateGeolocation();
+});
+
+function AddCityCardByName(cityName) {
+    let newCityContainer = document.querySelector(".skeleton .cityCard").cloneNode();
+    newCityContainer.classList.add("loading");
+}

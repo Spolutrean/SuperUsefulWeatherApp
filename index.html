@@ -1,188 +1,90 @@
 <!DOCTYPE html>
 <html>
-    <head>
-        <meta charset="UTF-8">
-        <meta content="width=device-width, initial-scale=1" name="viewport" />
-        <link rel="stylesheet" href="styles.css">
-        <link rel="preconnect" href="https://fonts.gstatic.com">
-        <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@500&display=swap" rel="stylesheet">
-        <script src="main.js"></script>
-    </head>
-    <body>
-        <main>
-            <section class="titleSection section">
-                <h1 class="weatherHereTitle">Weather here</h1>
-                <button class="updateGeolocationButton">Update geolocation</button>
-                <button class="updateGeolocationButtonSmall">&#10227</button>
+<head>
+    <meta charset="UTF-8">
+    <meta content="width=device-width, initial-scale=1" name="viewport"/>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@500&display=swap" rel="stylesheet">
+</head>
+<body>
+<main>
+    <section class="titleSection section">
+        <h1 class="weatherHereTitle">Weather here</h1>
+        <button class="updateGeolocationButton">Update geolocation</button>
+        <button class="updateGeolocationButtonSmall">&#10227</button>
+    </section>
+    <section class="mainCitySection section loading">
+        <section class="loadingScreen">
+            <div class="loader">Loading...</div>
+        </section>
+        <section class="loadedContent">
+            <section class="mainCityDescription">
+            <h2 class="cityName"></h2>
+            <section class="mainCityShortDescription">
+                <img class="cityImage">
+                <span class="cityDegrees"></span>
             </section>
-            <section class="mainCitySection section">
-                <section class="mainCityDescription">
-                    <h2 class="mainCityName">Saint Petersburg</h2>
-                    <section class="mainCityShortDescription">
-                        <img class="mainCityImage" src="resources/rain.svg">
-                        <span class="mainCityDegrees">8 &#176;C</span>
-                    </section>
+        </section>
+            <ul class="weatherDescription">
+                <li>
+                    <span>Windy</span>
+                    <span></span>
+                </li>
+                <li>
+                    <span>Cloudiness</span>
+                    <span></span></li>
+                <li>
+                    <span>Pressure</span>
+                    <span></span></li>
+                <li>
+                    <span>Humidity</span>
+                    <span></span></li>
+                <li>
+                    <span>Coordinates</span>
+                    <span></span></li>
+            </ul>
+        </section>
+    </section>
+    <section class="favouritesSection section">
+        <h2 class="favouritesTitle">Favourites</h2>
+        <form class="addNewCitySection">
+            <input class="addNewCityField" type="text" placeholder="Add new city">
+            <button class="addNewCityButton">+</button>
+        </form>
+    </section>
+    <section class="section">
+        <ul class="cities"></ul>
+        <div class="skeleton">
+            <div class="cityCard">
+                <section class="cityDescription">
+                    <h3 class="cityName"></h3>
+                    <span class="cityDegrees"></span>
+                    <img class="cityImage">
+                    <button class="closeCitySectionButton">&#10005</button>
                 </section>
                 <ul class="weatherDescription">
                     <li>
                         <span>Windy</span>
-                        <span>Moderate breeze, 6 m/s, North</span>
+                        <span></span>
                     </li>
                     <li>
                         <span>Cloudiness</span>
-                        <span>Broken clouds</span></li>
+                        <span></span></li>
                     <li>
                         <span>Pressure</span>
-                        <span>1013 hpa</span></li>
+                        <span></span></li>
                     <li>
                         <span>Humidity</span>
-                        <span>52%</span></li>
+                        <span></span></li>
                     <li>
                         <span>Coordinates</span>
-                        <span>[59.88, 30.42]</span></li>
+                        <span></span></li>
                 </ul>
-            </section>
-            <section class="favouritesSection section">
-                <h2 class="favouritesTitle">Favourites</h2>
-                <form class="addNewCitySection">
-                    <input class="addNewCityField" type="text" placeholder="Add new city">
-                    <button class="addNewCityButton">+</button>
-                </form>
-            </section>
-            <section class="section">
-                <ul class="cities">
-                    <div class="cityCard">
-                        <section class="cityDescription">
-                            <h3 class="cityName">Moscow</h3>
-                            <span class="cityDegrees">8 &#176;C</span>
-                            <img class="cityImage" src="resources/rain.svg">
-                            <button class="closeCitySectionButton">&#10005</button>
-                        </section>
-                        <ul class="weatherDescription">
-                            <li>
-                                <span>Windy</span>
-                                <span>Moderate breeze, 6 m/s, North</span>
-                            </li>
-                            <li>
-                                <span>Cloudiness</span>
-                                <span>Broken clouds</span></li>
-                            <li>
-                                <span>Pressure</span>
-                                <span>1013 hpa</span></li>
-                            <li>
-                                <span>Humidity</span>
-                                <span>52%</span></li>
-                            <li>
-                                <span>Coordinates</span>
-                                <span>[59.88, 30.42]</span></li>
-                        </ul>
-                    </div>
-                    <div class="cityCard">
-                        <section class="cityDescription">
-                            <h3 class="cityName">Moscow</h3>
-                            <span class="cityDegrees">8 &#176;C</span>
-                            <img class="cityImage" src="resources/rain.svg">
-                            <button class="closeCitySectionButton">&#10005</button>
-                        </section>
-                        <ul class="weatherDescription">
-                            <li>
-                                <span>Windy</span>
-                                <span>Moderate breeze, 6 m/s, North</span>
-                            </li>
-                            <li>
-                                <span>Cloudiness</span>
-                                <span>Broken clouds</span></li>
-                            <li>
-                                <span>Pressure</span>
-                                <span>1013 hpa</span></li>
-                            <li>
-                                <span>Humidity</span>
-                                <span>52%</span></li>
-                            <li>
-                                <span>Coordinates</span>
-                                <span>[59.88, 30.42]</span></li>
-                        </ul>
-                    </div>
-                    <div class="cityCard">
-                        <section class="cityDescription">
-                            <h3 class="cityName">Moscow</h3>
-                            <span class="cityDegrees">8 &#176;C</span>
-                            <img class="cityImage" src="resources/rain.svg">
-                            <button class="closeCitySectionButton">&#10005</button>
-                        </section>
-                        <ul class="weatherDescription">
-                            <li>
-                                <span>Windy</span>
-                                <span>Moderate breeze, 6 m/s, North</span>
-                            </li>
-                            <li>
-                                <span>Cloudiness</span>
-                                <span>Broken clouds</span></li>
-                            <li>
-                                <span>Pressure</span>
-                                <span>1013 hpa</span></li>
-                            <li>
-                                <span>Humidity</span>
-                                <span>52%</span></li>
-                            <li>
-                                <span>Coordinates</span>
-                                <span>[59.88, 30.42]</span></li>
-                        </ul>
-                    </div>
-                    <div class="cityCard">
-                        <section class="cityDescription">
-                            <h3 class="cityName">Moscow</h3>
-                            <span class="cityDegrees">8 &#176;C</span>
-                            <img class="cityImage" src="resources/rain.svg">
-                            <button class="closeCitySectionButton">&#10005</button>
-                        </section>
-                        <ul class="weatherDescription">
-                            <li>
-                                <span>Windy</span>
-                                <span>Moderate breeze, 6 m/s, North</span>
-                            </li>
-                            <li>
-                                <span>Cloudiness</span>
-                                <span>Broken clouds</span></li>
-                            <li>
-                                <span>Pressure</span>
-                                <span>1013 hpa</span></li>
-                            <li>
-                                <span>Humidity</span>
-                                <span>52%</span></li>
-                            <li>
-                                <span>Coordinates</span>
-                                <span>[59.88, 30.42]</span></li>
-                        </ul>
-                    </div>
-                    <div class="cityCard">
-                    <section class="cityDescription">
-                        <h3 class="cityName">Moscow</h3>
-                        <span class="cityDegrees">8 &#176;C</span>
-                        <img class="cityImage" src="resources/rain.svg">
-                        <button class="closeCitySectionButton">&#10005</button>
-                    </section>
-                    <ul class="weatherDescription">
-                        <li>
-                            <span>Windy</span>
-                            <span>Moderate breeze, 6 m/s, North</span>
-                        </li>
-                        <li>
-                            <span>Cloudiness</span>
-                            <span>Broken clouds</span></li>
-                        <li>
-                            <span>Pressure</span>
-                            <span>1013 hpa</span></li>
-                        <li>
-                            <span>Humidity</span>
-                            <span>52%</span></li>
-                        <li>
-                            <span>Coordinates</span>
-                            <span>[59.88, 30.42]</span></li>
-                    </ul>
-                </div>
-                </ul>
-            </section>
-        </main>
-    </body>
+            </div>
+        </div>
+    </section>
+</main>
+<script src="main.js"></script>
+</body>
 </html>
