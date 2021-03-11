@@ -56,13 +56,6 @@ function SetErrorForMainCity() {
     setTimeout(UpdateGeolocation, 5000);
 }
 
-function SetErrorForCity(cityContainer) {
-    cityContainer.classList.add("error");
-    setTimeout(() => {
-        cities.removeChild(cityContainer);
-    }, 5000);
-}
-
 function UpdateGeolocation() {
     mainCitySection.classList.add("loading");
     mainCitySection.classList.remove("error");
@@ -88,8 +81,6 @@ function RemoveCityFromLocalStorage(cityName) {
 }
 
 function AddCity(cityName) {
-    if (cityName.length === 0) return;
-
     let newCityContainer = document.querySelector("template").content.querySelector(".cityCard").cloneNode(true);
     newCityContainer.querySelector(".closeCitySectionButton").addEventListener("click",
         () => {
@@ -117,6 +108,8 @@ function AddCity(cityName) {
 }
 
 function CreateCity(cityName) {
+    if (cityName.length === 0) return;
+
     cityName = cityName.toLowerCase();
 
     if (window.localStorage["favoriteCities"] == null) {
