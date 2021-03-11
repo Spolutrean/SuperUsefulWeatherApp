@@ -6,18 +6,20 @@ const inputField = document.querySelector(".addNewCityField");
 const addNewCityButton = document.querySelector(".addNewCityButton");
 const form = document.querySelector(".addNewCitySection");
 const cities = document.querySelector(".cities");
+const cityNotFoundMessage = "Failed to found this city";
 
 function HandleWeatherRequest(url, handler, errorHandler) {
     fetch(url)
         .then(res => {
             if (!res.ok) {
-                throw new Error("Failed to make API request");
+                throw new Error(cityNotFoundMessage);
             }
             return res.json();
         })
         .then(handler)
         .catch(errorHandler);
 }
+
 function HandleWeatherRequestByCity(cityName, handler, errorHandler) {
     HandleWeatherRequest(`https://api.openweathermap.org/data/2.5/weather?units=metric&q=${cityName}&appid=${APIkey}`, handler, errorHandler);
 }
@@ -56,7 +58,9 @@ function SetErrorForMainCity() {
 
 function SetErrorForCity(cityContainer) {
     cityContainer.classList.add("error");
-    setTimeout(() => { cities.removeChild(cityContainer); }, 5000);
+    setTimeout(() => {
+        cities.removeChild(cityContainer);
+    }, 5000);
 }
 
 function UpdateGeolocation() {
@@ -73,32 +77,76 @@ function UpdateGeolocation() {
     );
 }
 
-UpdateGeolocation();
-
 
 updateGeolocationButton.addEventListener("click", UpdateGeolocation);
 updateGeolocationButtonSmall.addEventListener("click", UpdateGeolocation);
+
+function RemoveCityFromLocalStorage(cityName) {
+    let favoriteCities = JSON.parse(window.localStorage["favoriteCities"]);
+    favoriteCities.splice(favoriteCities.indexOf(cityName), 1);
+    window.localStorage["favoriteCities"] = JSON.stringify(favoriteCities);
+}
 
 function AddCity(cityName) {
     if (cityName.length === 0) return;
 
     let newCityContainer = document.querySelector("template").content.querySelector(".cityCard").cloneNode(true);
-    newCityContainer.querySelector(".closeCitySectionButton").addEventListener("click", () => { cities.removeChild(newCityContainer); });
+    newCityContainer.querySelector(".closeCitySectionButton").addEventListener("click",
+        () => {
+            cities.removeChild(newCityContainer);
+            RemoveCityFromLocalStorage(cityName);
+        });
+
     newCityContainer.classList.add("loading");
+
     cities.appendChild(newCityContainer);
     HandleWeatherRequestByCity(cityName,
-            weather => { UpdateCity(newCityContainer, weather) },
-        () => { SetErrorForCity(newCityContainer) });
+        weather => {
+            UpdateCity(newCityContainer, weather);
+        },
+        error => {
+            if (error.message === cityNotFoundMessage) {
+                RemoveCityFromLocalStorage(cityName);
+                setTimeout(() => {
+                    cities.removeChild(newCityContainer);
+                }, 5000);
+            }
+
+            newCityContainer.classList.add("error");
+        });
+}
+
+function CreateCity(cityName) {
+    cityName = cityName.toLowerCase();
+
+    if (window.localStorage["favoriteCities"] == null) {
+        window.localStorage["favoriteCities"] = JSON.stringify([cityName]);
+    } else if (!JSON.parse(window.localStorage["favoriteCities"]).includes(cityName)) {
+        window.localStorage["favoriteCities"] = JSON.stringify(
+            JSON.parse(window.localStorage["favoriteCities"]).concat([cityName]));
+    } else {
+        alert("This city already in favourites");
+        return;
+    }
+
+    AddCity(cityName);
 }
 
 addNewCityButton.addEventListener("click", () => {
-    AddCity(inputField.value);
+    CreateCity(inputField.value);
     inputField.value = "";
     inputField.focus();
 });
 form.addEventListener("submit", e => {
     e.preventDefault();
-    AddCity(inputField.value);
+    CreateCity(inputField.value);
     inputField.value = "";
     inputField.focus();
 });
+
+UpdateGeolocation();
+if (window.localStorage["favoriteCities"] != null) {
+    JSON.parse(window.localStorage["favoriteCities"]).map(cityName => {
+        AddCity(cityName);
+    });
+}

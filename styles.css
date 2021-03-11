@@ -6,8 +6,8 @@
 }
 
 html {
-    display:flex;
-    flex-direction:column;
+    display: flex;
+    flex-direction: column;
 }
 
 body {
@@ -239,9 +239,11 @@ main {
     .weatherHereTitle {
         width: 60%;
     }
+
     .updateGeolocationButton {
         display: none;
     }
+
     .updateGeolocationButtonSmall {
         display: block;
     }
@@ -250,9 +252,11 @@ main {
         width: 100%;
         margin-bottom: 1em;
     }
+
     .mainCityShortDescription {
         margin: 1em 0;
     }
+
     .mainCityShortDescription .cityDegrees {
         font-size: 60px;
     }
@@ -268,18 +272,20 @@ main {
     .favouritesTitle {
         margin-bottom: 0.3em;
     }
+
     .addNewCitySection {
         width: 100%;
         justify-content: space-between;
     }
+
     .addNewCityField {
         width: 80%;
     }
+
     .addNewCityButton {
         margin: 0;
     }
 }
-
 
 
 button {
@@ -314,6 +320,7 @@ button {
     -ms-transform: translateZ(0);
     transform: translateZ(0);
 }
+
 @-webkit-keyframes load4 {
     0%,
     100% {
@@ -341,6 +348,7 @@ button {
         box-shadow: 0em -3em 0 0, 2em -2em 0 -1em, 3em 0 0 -1em, 2em 2em 0 -1em, 0 3em 0 -1em, -2em 2em 0 0, -3em 0em 0 0, -2em -2em 0 0.2em;
     }
 }
+
 @keyframes load4 {
     0%,
     100% {
@@ -389,6 +397,7 @@ button {
     width: 128px;
     height: 128px;
 }
+
 .citySadCloud {
     width: 64px;
     height: 64px;
@@ -398,6 +407,7 @@ button {
     font-size: 2em;
     color: var(--dark-primary-color);
 }
+
 .cityErrorMessage {
     font-size: 1.5em;
     color: var(--dark-primary-color);
