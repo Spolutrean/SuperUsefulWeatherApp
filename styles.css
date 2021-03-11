@@ -15,6 +15,7 @@ body {
 
     max-width: 1200px;
     min-width: 730px;
+    width: 60%;
 }
 
 main {
@@ -232,6 +233,7 @@ main {
 @media screen and (max-width: 730px) {
     body {
         min-width: 320px;
+        width: 100%;
     }
 
     .weatherHereTitle {
@@ -282,11 +284,6 @@ main {
 
 button {
     border: unset;
-}
-
-
-.template {
-    display: none;
 }
 
 .loadingScreen {
@@ -370,4 +367,38 @@ button {
     87.5% {
         box-shadow: 0em -3em 0 0, 2em -2em 0 -1em, 3em 0 0 -1em, 2em 2em 0 -1em, 0 3em 0 -1em, -2em 2em 0 0, -3em 0em 0 0, -2em -2em 0 0.2em;
     }
+}
+
+.errorScreen {
+    display: none;
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background-color: white;
+    z-index: 200;
+}
+
+.error .errorScreen {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-evenly;
+}
+
+.mainCitySadCloud {
+    width: 128px;
+    height: 128px;
+}
+.citySadCloud {
+    width: 64px;
+    height: 64px;
+}
+
+.mainCityErrorMessage {
+    font-size: 2em;
+    color: var(--dark-primary-color);
+}
+.cityErrorMessage {
+    font-size: 1.5em;
+    color: var(--dark-primary-color);
 }

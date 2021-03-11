@@ -1,21 +1,29 @@
 const APIkey = 'a4e381df896abd612a5a698a20c835d3';
+const mainCitySection = document.querySelector(".mainCitySection");
+const updateGeolocationButton = document.querySelector(".updateGeolocationButton");
+const updateGeolocationButtonSmall = document.querySelector(".updateGeolocationButtonSmall");
+const inputField = document.querySelector(".addNewCityField");
+const addNewCityButton = document.querySelector(".addNewCityButton");
+const form = document.querySelector(".addNewCitySection");
+const cities = document.querySelector(".cities");
 
-function HandleWeatherRequest(url, handler) {
+function HandleWeatherRequest(url, handler, errorHandler) {
     fetch(url)
         .then(res => {
+            if (!res.ok) {
+                throw new Error("Failed to make API request");
+            }
             return res.json();
         })
-        .then(data => {
-            //console.log(data);
-            handler(data);
-        });
+        .then(handler)
+        .catch(errorHandler);
 }
-function HandleWeatherRequestByCity(cityName, handler) {
-    HandleWeatherRequest(`https://api.openweathermap.org/data/2.5/weather?units=metric&q=${cityName}&appid=${APIkey}`, handler);
+function HandleWeatherRequestByCity(cityName, handler, errorHandler) {
+    HandleWeatherRequest(`https://api.openweathermap.org/data/2.5/weather?units=metric&q=${cityName}&appid=${APIkey}`, handler, errorHandler);
 }
 
-function HandleWeatherRequestByCoordinates(latitude, longitude, handler) {
-    HandleWeatherRequest(`https://api.openweathermap.org/data/2.5/weather?units=metric&lat=${latitude}&lon=${longitude}&appid=${APIkey}`, handler);
+function HandleWeatherRequestByCoordinates(latitude, longitude, handler, errorHandler) {
+    HandleWeatherRequest(`https://api.openweathermap.org/data/2.5/weather?units=metric&lat=${latitude}&lon=${longitude}&appid=${APIkey}`, handler, errorHandler);
 }
 
 function UpdateCity(container, weather) {
@@ -34,43 +42,63 @@ function UpdateCity(container, weather) {
 }
 
 function UpdateMainCity(weather) {
-    UpdateCity(document.querySelector(".mainCitySection"), weather);
+    UpdateCity(mainCitySection, weather);
+    updateGeolocationButton.disabled = false;
+    updateGeolocationButtonSmall.disabled = false;
+}
+
+function SetErrorForMainCity() {
+    mainCitySection.classList.add("error");
+    mainCitySection.classList.remove("loading");
+
+    setTimeout(UpdateGeolocation, 5000);
+}
+
+function SetErrorForCity(cityContainer) {
+    cityContainer.classList.add("error");
+    setTimeout(() => { cities.removeChild(cityContainer); }, 5000);
 }
 
 function UpdateGeolocation() {
+    mainCitySection.classList.add("loading");
+    mainCitySection.classList.remove("error");
+
+    updateGeolocationButton.disabled = true;
+    updateGeolocationButtonSmall.disabled = true;
+
+
     navigator.geolocation.getCurrentPosition(
-        position => HandleWeatherRequestByCoordinates(position.coords.latitude, position.coords.longitude, UpdateMainCity),
-        err => HandleWeatherRequestByCity("saint petersburg", UpdateMainCity));
+        position => HandleWeatherRequestByCoordinates(position.coords.latitude, position.coords.longitude, UpdateMainCity, SetErrorForMainCity),
+        () => HandleWeatherRequestByCity("saint petersburg", UpdateMainCity, SetErrorForMainCity)
+    );
 }
 
 UpdateGeolocation();
 
 
-document.querySelector(".updateGeolocationButton").addEventListener("click", UpdateGeolocation);
-document.querySelector(".updateGeolocationButtonSmall").addEventListener("click", UpdateGeolocation);
-
-const inputField = document.querySelector(".addNewCityField");
-const addNewCityButton = document.querySelector(".addNewCityButton");
-const form = document.querySelector(".addNewCitySection");
-const cities = document.querySelector(".cities");
+updateGeolocationButton.addEventListener("click", UpdateGeolocation);
+updateGeolocationButtonSmall.addEventListener("click", UpdateGeolocation);
 
 function AddCity(cityName) {
-    if(cityName.length === 0) return;
+    if (cityName.length === 0) return;
 
-    let newCityContainer = document.querySelector("#templates").content.querySelector(".cityCard").cloneNode(true);
-    newCityContainer.querySelector(".closeCitySectionButton").addEventListener("click",
-        () => { cities.removeChild(newCityContainer); });
+    let newCityContainer = document.querySelector("template").content.querySelector(".cityCard").cloneNode(true);
+    newCityContainer.querySelector(".closeCitySectionButton").addEventListener("click", () => { cities.removeChild(newCityContainer); });
     newCityContainer.classList.add("loading");
     cities.appendChild(newCityContainer);
-    HandleWeatherRequestByCity(cityName, weather => { UpdateCity(newCityContainer, weather) });
+    HandleWeatherRequestByCity(cityName,
+            weather => { UpdateCity(newCityContainer, weather) },
+        () => { SetErrorForCity(newCityContainer) });
 }
 
 addNewCityButton.addEventListener("click", () => {
     AddCity(inputField.value);
     inputField.value = "";
+    inputField.focus();
 });
 form.addEventListener("submit", e => {
     e.preventDefault();
     AddCity(inputField.value);
     inputField.value = "";
+    inputField.focus();
 });

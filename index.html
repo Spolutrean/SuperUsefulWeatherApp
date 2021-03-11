@@ -14,9 +14,13 @@
         <button class="updateGeolocationButton">Update geolocation</button>
         <button class="updateGeolocationButtonSmall">&#10227</button>
     </section>
-    <section class="mainCitySection section loading">
+    <section class="mainCitySection section">
         <section class="loadingScreen">
             <div class="loader">Loading...</div>
+        </section>
+        <section class="errorScreen">
+            <img class="mainCitySadCloud" src="resources/sad-cloud.png"/>
+            <span class="mainCityErrorMessage">Can't get city information will try again in 5 seconds...</span>
         </section>
         <section class="loadedContent">
             <section class="mainCityDescription">
@@ -61,6 +65,10 @@
     <div class="cityCard loading">
         <section class="loadingScreen">
             <div class="loader">Loading...</div>
+        </section>
+        <section class="errorScreen">
+            <img class="citySadCloud" src="resources/sad-cloud.png"/>
+            <span class="cityErrorMessage">Can't get city information</span>
         </section>
         <section class="loadedContent">
             <section class="cityDescription">
