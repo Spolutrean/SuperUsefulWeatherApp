@@ -6,4 +6,4 @@ https://spolutrean.github.io/SuperUsefulWeatherApp/
 
 ToDo list:
 * Front-end part ✅
-* Use third-party API ❌
+* Use third-party API ✅
