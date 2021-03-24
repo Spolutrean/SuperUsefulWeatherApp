@@ -22,7 +22,7 @@ function HandleWeatherRequest(url, handler, errorHandler) {
 }
 
 function HandleWeatherRequestByCity(cityName, handler, errorHandler) {
-    HandleWeatherRequest(`${serverLink}/weather/city?name=${cityName}`, handler, errorHandler);
+    HandleWeatherRequest(`${serverLink}/weather/city?cityName=${cityName}`, handler, errorHandler);
 }
 
 function HandleWeatherRequestByCoordinates(latitude, longitude, handler, errorHandler) {
