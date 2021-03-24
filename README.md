@@ -2,7 +2,7 @@
 Weather site in educational purposes only
 
 View:
-https://spolutrean.github.io/SuperUsefulWeatherApp/
+https://spolutrean.github.io/SuperUsefulWeatherApp/clientOnlyVersion/
 
 ToDo list:
 * Front-end part ✅
