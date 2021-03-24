@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta content="width=device-width, initial-scale=1" name="viewport"/>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@500&display=swap" rel="stylesheet">
+</head>
+<body>
+<main>
+    <section class="titleSection section">
+        <h1 class="weatherHereTitle">Weather here</h1>
+        <button class="updateGeolocationButton">Update geolocation</button>
+        <button class="updateGeolocationButtonSmall">&#10227</button>
+    </section>
+    <section class="mainCitySection section">
+        <section class="loadingScreen">
+            <div class="loader">Loading...</div>
+        </section>
+        <section class="errorScreen">
+            <img class="mainCitySadCloud" src="resources/sad-cloud.png"/>
+            <span class="mainCityErrorMessage">Can't get city information will try again in 5 seconds...</span>
+        </section>
+        <section class="loadedContent">
+            <section class="mainCityDescription">
+                <h2 class="cityName"></h2>
+                <section class="mainCityShortDescription">
+                    <img class="cityImage">
+                    <span class="cityDegrees"></span>
+                </section>
+            </section>
+            <ul class="weatherDescription">
+                <li>
+                    <span>Windy</span>
+                    <span></span>
+                </li>
+                <li>
+                    <span>Cloudiness</span>
+                    <span></span></li>
+                <li>
+                    <span>Pressure</span>
+                    <span></span></li>
+                <li>
+                    <span>Humidity</span>
+                    <span></span></li>
+                <li>
+                    <span>Coordinates</span>
+                    <span></span></li>
+            </ul>
+        </section>
+    </section>
+    <section class="favouritesSection section">
+        <h2 class="favouritesTitle">Favourites</h2>
+        <form class="addNewCitySection">
+            <input class="addNewCityField" type="text" placeholder="Add new city">
+            <button class="addNewCityButton" type="button">+</button>
+        </form>
+    </section>
+    <section class="section">
+        <ul class="cities"></ul>
+    </section>
+</main>
+<template id="templates">
+    <div class="cityCard loading">
+        <section class="loadingScreen">
+            <div class="loader">Loading...</div>
+        </section>
+        <section class="errorScreen">
+            <img class="citySadCloud" src="resources/sad-cloud.png"/>
+            <span class="cityErrorMessage">Can't get city information</span>
+        </section>
+        <section class="loadedContent">
+            <section class="cityDescription">
+                <h3 class="cityName"></h3>
+                <span class="cityDegrees"></span>
+                <img class="cityImage">
+                <button class="closeCitySectionButton">&#10005</button>
+            </section>
+            <ul class="weatherDescription">
+                <li>
+                    <span>Windy</span>
+                    <span></span>
+                </li>
+                <li>
+                    <span>Cloudiness</span>
+                    <span></span></li>
+                <li>
+                    <span>Pressure</span>
+                    <span></span></li>
+                <li>
+                    <span>Humidity</span>
+                    <span></span></li>
+                <li>
+                    <span>Coordinates</span>
+                    <span></span></li>
+            </ul>
+        </section>
+    </div>
+</template>
+<script src="main.js"></script>
+</body>
+</html>

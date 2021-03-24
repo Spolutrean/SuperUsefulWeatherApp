@@ -1,0 +1,414 @@
+:root {
+    /*gray*/
+    --primary-color: #a7afb1;
+    --dark-primary-color: #4f6166;
+    --light-primary-color: #f1f1f1;
+}
+
+html {
+    display: flex;
+    flex-direction: column;
+}
+
+body {
+    align-self: center;
+
+    max-width: 1200px;
+    min-width: 730px;
+    width: 60%;
+}
+
+main {
+    width: 100%;
+    height: 100%;
+}
+
+.section {
+    margin: 1.2em 1.2em;
+}
+
+.titleSection {
+    display: flex;
+    align-items: center;
+}
+
+.weatherHereTitle {
+    width: 33%;
+    margin: 0;
+    align-self: center;
+    color: var(--dark-primary-color);
+}
+
+.updateGeolocationButton {
+    width: 33%;
+    height: 3em;
+    border-radius: 10px;
+    font-size: 1em;
+    align-self: center;
+    background-color: var(--primary-color);
+    color: var(--dark-primary-color);
+}
+
+.updateGeolocationButtonSmall {
+    display: none;
+    width: 32px;
+    height: 32px;
+    align-self: center;
+    background-color: var(--primary-color);
+    color: var(--dark-primary-color);
+    font-weight: 900;
+    border-radius: 5px;
+    font-size: 1em;
+}
+
+.mainCitySection {
+    position: relative;
+}
+
+.mainCitySection .loadedContent {
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+}
+
+.mainCityDescription {
+    width: 45%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.mainCityShortDescription {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.mainCityShortDescription .cityImage {
+    width: 96px;
+    height: 96px
+}
+
+.mainCityShortDescription .cityDegrees {
+    font-size: 75px;
+    color: gray;
+    font-family: 'Roboto', sans-serif;
+    margin: 0;
+}
+
+.mainCityDescription .cityName {
+    font-size: 2em;
+    margin: 0;
+    font-family: 'Roboto', sans-serif;
+    color: var(--dark-primary-color);
+}
+
+.weatherDescription {
+    width: 45%;
+    margin: 0;
+    padding: 0;
+}
+
+.weatherDescription li {
+    list-style-type: none;
+    background-color: var(--primary-color);
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    margin: 0.5em 0;
+    padding: 0.5em 0;
+}
+
+.weatherDescription li :first-child {
+    padding-left: 0.4em;
+    color: white;
+    font-family: 'Roboto', sans-serif;
+}
+
+.weatherDescription li :last-child {
+    padding-right: 0.4em;
+    color: white;
+}
+
+.favouritesSection {
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+}
+
+.favouritesTitle {
+    margin: 0;
+    padding: 0;
+    font-size: 2em;
+    color: var(--dark-primary-color);
+}
+
+.addNewCitySection {
+    width: 45%;
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+}
+
+.addNewCityField {
+    width: 70%;
+    height: 1.3em;
+    font-size: 1.5em;
+    border: none;
+    background: var(--light-primary-color);
+}
+
+.addNewCityField::placeholder {
+    color: var(--primary-color);
+}
+
+.addNewCityButton {
+    width: 32px;
+    height: 32px;
+    margin-left: 5px;
+    border-radius: 50%;
+    font-size: 1.5em;
+    color: white;
+    background-color: var(--dark-primary-color);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.cities {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    padding: 0;
+}
+
+.cityCard {
+    width: 45%;
+    margin-bottom: 1.5em;
+    position: relative;
+}
+
+.cityCard .loadedContent ul {
+    width: 100%;
+}
+
+.cityDescription {
+    display: flex;
+    align-items: center;
+}
+
+.cityName {
+    margin: 0;
+    padding: 0;
+    color: var(--dark-primary-color);
+    font-family: 'Roboto', sans-serif;
+}
+
+.cityDegrees {
+    margin: 0 1em;
+    font-size: 1.7em;
+    color: gray;
+    font-family: 'Roboto', sans-serif;
+}
+
+.cityImage {
+    width: 32px;
+    height: 32px;
+}
+
+.closeCitySectionButton {
+    margin-left: auto;
+    width: 32px;
+    height: 32px;
+    /*margin: 0 5px;*/
+    border-radius: 50%;
+    font-size: 1.5em;
+    color: white;
+    background-color: var(--dark-primary-color);
+    display: flex;
+    justify-content: center;
+    align-content: center;
+}
+
+@media screen and (max-width: 730px) {
+    body {
+        min-width: 320px;
+        width: 100%;
+    }
+
+    .weatherHereTitle {
+        width: 60%;
+    }
+
+    .updateGeolocationButton {
+        display: none;
+    }
+
+    .updateGeolocationButtonSmall {
+        display: block;
+    }
+
+    .mainCityDescription {
+        width: 100%;
+        margin-bottom: 1em;
+    }
+
+    .mainCityShortDescription {
+        margin: 1em 0;
+    }
+
+    .mainCityShortDescription .cityDegrees {
+        font-size: 60px;
+    }
+
+    .weatherDescription {
+        width: 100%;
+    }
+
+    .cityCard {
+        width: 100%;
+    }
+
+    .favouritesTitle {
+        margin-bottom: 0.3em;
+    }
+
+    .addNewCitySection {
+        width: 100%;
+        justify-content: space-between;
+    }
+
+    .addNewCityField {
+        width: 80%;
+    }
+
+    .addNewCityButton {
+        margin: 0;
+    }
+}
+
+
+button {
+    border: unset;
+}
+
+.loadingScreen {
+    display: none;
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background-color: white;
+    z-index: 100;
+}
+
+.loading .loadingScreen {
+    display: block;
+}
+
+.loader {
+    color: var(--dark-primary-color);
+    font-size: 20px;
+    margin: 100px auto;
+    width: 1em;
+    height: 1em;
+    border-radius: 50%;
+    position: relative;
+    text-indent: -9999em;
+    -webkit-animation: load4 1.3s infinite linear;
+    animation: load4 1.3s infinite linear;
+    -webkit-transform: translateZ(0);
+    -ms-transform: translateZ(0);
+    transform: translateZ(0);
+}
+
+@-webkit-keyframes load4 {
+    0%,
+    100% {
+        box-shadow: 0 -3em 0 0.2em, 2em -2em 0 0em, 3em 0 0 -1em, 2em 2em 0 -1em, 0 3em 0 -1em, -2em 2em 0 -1em, -3em 0 0 -1em, -2em -2em 0 0;
+    }
+    12.5% {
+        box-shadow: 0 -3em 0 0, 2em -2em 0 0.2em, 3em 0 0 0, 2em 2em 0 -1em, 0 3em 0 -1em, -2em 2em 0 -1em, -3em 0 0 -1em, -2em -2em 0 -1em;
+    }
+    25% {
+        box-shadow: 0 -3em 0 -0.5em, 2em -2em 0 0, 3em 0 0 0.2em, 2em 2em 0 0, 0 3em 0 -1em, -2em 2em 0 -1em, -3em 0 0 -1em, -2em -2em 0 -1em;
+    }
+    37.5% {
+        box-shadow: 0 -3em 0 -1em, 2em -2em 0 -1em, 3em 0em 0 0, 2em 2em 0 0.2em, 0 3em 0 0em, -2em 2em 0 -1em, -3em 0em 0 -1em, -2em -2em 0 -1em;
+    }
+    50% {
+        box-shadow: 0 -3em 0 -1em, 2em -2em 0 -1em, 3em 0 0 -1em, 2em 2em 0 0em, 0 3em 0 0.2em, -2em 2em 0 0, -3em 0em 0 -1em, -2em -2em 0 -1em;
+    }
+    62.5% {
+        box-shadow: 0 -3em 0 -1em, 2em -2em 0 -1em, 3em 0 0 -1em, 2em 2em 0 -1em, 0 3em 0 0, -2em 2em 0 0.2em, -3em 0 0 0, -2em -2em 0 -1em;
+    }
+    75% {
+        box-shadow: 0em -3em 0 -1em, 2em -2em 0 -1em, 3em 0em 0 -1em, 2em 2em 0 -1em, 0 3em 0 -1em, -2em 2em 0 0, -3em 0em 0 0.2em, -2em -2em 0 0;
+    }
+    87.5% {
+        box-shadow: 0em -3em 0 0, 2em -2em 0 -1em, 3em 0 0 -1em, 2em 2em 0 -1em, 0 3em 0 -1em, -2em 2em 0 0, -3em 0em 0 0, -2em -2em 0 0.2em;
+    }
+}
+
+@keyframes load4 {
+    0%,
+    100% {
+        box-shadow: 0 -3em 0 0.2em, 2em -2em 0 0em, 3em 0 0 -1em, 2em 2em 0 -1em, 0 3em 0 -1em, -2em 2em 0 -1em, -3em 0 0 -1em, -2em -2em 0 0;
+    }
+    12.5% {
+        box-shadow: 0 -3em 0 0, 2em -2em 0 0.2em, 3em 0 0 0, 2em 2em 0 -1em, 0 3em 0 -1em, -2em 2em 0 -1em, -3em 0 0 -1em, -2em -2em 0 -1em;
+    }
+    25% {
+        box-shadow: 0 -3em 0 -0.5em, 2em -2em 0 0, 3em 0 0 0.2em, 2em 2em 0 0, 0 3em 0 -1em, -2em 2em 0 -1em, -3em 0 0 -1em, -2em -2em 0 -1em;
+    }
+    37.5% {
+        box-shadow: 0 -3em 0 -1em, 2em -2em 0 -1em, 3em 0em 0 0, 2em 2em 0 0.2em, 0 3em 0 0em, -2em 2em 0 -1em, -3em 0em 0 -1em, -2em -2em 0 -1em;
+    }
+    50% {
+        box-shadow: 0 -3em 0 -1em, 2em -2em 0 -1em, 3em 0 0 -1em, 2em 2em 0 0em, 0 3em 0 0.2em, -2em 2em 0 0, -3em 0em 0 -1em, -2em -2em 0 -1em;
+    }
+    62.5% {
+        box-shadow: 0 -3em 0 -1em, 2em -2em 0 -1em, 3em 0 0 -1em, 2em 2em 0 -1em, 0 3em 0 0, -2em 2em 0 0.2em, -3em 0 0 0, -2em -2em 0 -1em;
+    }
+    75% {
+        box-shadow: 0em -3em 0 -1em, 2em -2em 0 -1em, 3em 0em 0 -1em, 2em 2em 0 -1em, 0 3em 0 -1em, -2em 2em 0 0, -3em 0em 0 0.2em, -2em -2em 0 0;
+    }
+    87.5% {
+        box-shadow: 0em -3em 0 0, 2em -2em 0 -1em, 3em 0 0 -1em, 2em 2em 0 -1em, 0 3em 0 -1em, -2em 2em 0 0, -3em 0em 0 0, -2em -2em 0 0.2em;
+    }
+}
+
+.errorScreen {
+    display: none;
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background-color: white;
+    z-index: 200;
+}
+
+.error .errorScreen {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-evenly;
+}
+
+.mainCitySadCloud {
+    width: 128px;
+    height: 128px;
+}
+
+.citySadCloud {
+    width: 64px;
+    height: 64px;
+}
+
+.mainCityErrorMessage {
+    font-size: 2em;
+    color: var(--dark-primary-color);
+}
+
+.cityErrorMessage {
+    font-size: 1.5em;
+    color: var(--dark-primary-color);
+}
