@@ -29,7 +29,7 @@ function HandleWeatherRequestByCoordinates(latitude, longitude, handler, errorHa
     HandleWeatherRequest(`${serverLink}/weather/coordinates?&lat=${latitude}&lon=${longitude}`, handler, errorHandler);
 }
 
-function UpdateCity(container, weather) {
+function UpdateCityContainer(container, weather) {
     container.querySelector(".cityName").innerHTML = weather.name;
     container.querySelector(".cityDegrees").innerHTML = `${Math.ceil(weather.main.temp)} &#176;C`;
     container.querySelector(".cityImage").src = `http://openweathermap.org/img/wn/${weather.weather[0].icon}@4x.png`;
@@ -45,7 +45,7 @@ function UpdateCity(container, weather) {
 }
 
 function UpdateMainCity(weather) {
-    UpdateCity(mainCitySection, weather);
+    UpdateCityContainer(mainCitySection, weather);
     updateGeolocationButton.disabled = false;
     updateGeolocationButtonSmall.disabled = false;
 }
@@ -75,18 +75,31 @@ function UpdateGeolocation() {
 updateGeolocationButton.addEventListener("click", UpdateGeolocation);
 updateGeolocationButtonSmall.addEventListener("click", UpdateGeolocation);
 
-function RemoveCityFromLocalStorage(cityName) {
-    let favoriteCities = JSON.parse(window.localStorage["favoriteCities"]);
-    favoriteCities.splice(favoriteCities.indexOf(cityName), 1);
-    window.localStorage["favoriteCities"] = JSON.stringify(favoriteCities);
-}
+function AddCity(cityName, haveToAddToDb = true) {
+    if (cityName.length === 0) return;
 
-function AddCity(cityName) {
     let newCityContainer = document.querySelector("template").content.querySelector(".cityCard").cloneNode(true);
     newCityContainer.querySelector(".closeCitySectionButton").addEventListener("click",
         () => {
-            cities.removeChild(newCityContainer);
-            RemoveCityFromLocalStorage(cityName);
+            newCityContainer.classList.add("loading");
+            fetch(`${serverLink}/favorites`,
+                {
+                    method: "DELETE",
+                    headers: {
+                        "Content-Type": "application/json"
+                    },
+                    body: JSON.stringify({
+                        userId: window.localStorage["userId"],
+                        cityName: newCityContainer.querySelector(".cityName").innerHTML
+                    })
+                })
+                .then(res => {
+                    cities.removeChild(newCityContainer);
+                })
+                .catch(() => {
+                    newCityContainer.classList.remove("loading");
+                    alert("Can't remove this city from favorites, try again later");
+                })
         });
 
     newCityContainer.classList.add("loading");
@@ -94,11 +107,32 @@ function AddCity(cityName) {
     cities.appendChild(newCityContainer);
     HandleWeatherRequestByCity(cityName,
         weather => {
-            UpdateCity(newCityContainer, weather);
+            if (haveToAddToDb) {
+                fetch(`${serverLink}/favorites`,
+                    {
+                        method: "POST",
+                        headers: {
+                            "Content-Type": "application/json"
+                        },
+                        body: JSON.stringify({ userId: window.localStorage["userId"], cityName: weather.name })
+                    })
+                    .then(res => {
+                        if(!res.ok) {
+                            throw new Error();
+                        }
+                        return res.json();
+                    })
+                    .then(data => {
+                        window.localStorage.setItem("userId", JSON.stringify(data.userId));
+                    }).catch(() => {
+                        alert("This city already in favourites");
+                        cities.removeChild(newCityContainer);
+                    });
+            }
+            UpdateCityContainer(newCityContainer, weather);
         },
         error => {
             if (error.message === cityNotFoundMessage) {
-                RemoveCityFromLocalStorage(cityName);
                 setTimeout(() => {
                     cities.removeChild(newCityContainer);
                 }, 5000);
@@ -108,39 +142,27 @@ function AddCity(cityName) {
         });
 }
 
-function CreateCity(cityName) {
-    if (cityName.length === 0) return;
-
-    cityName = cityName.toLowerCase();
-
-    if (window.localStorage["favoriteCities"] == null) {
-        window.localStorage["favoriteCities"] = JSON.stringify([cityName]);
-    } else if (!JSON.parse(window.localStorage["favoriteCities"]).includes(cityName)) {
-        window.localStorage["favoriteCities"] = JSON.stringify(
-            JSON.parse(window.localStorage["favoriteCities"]).concat([cityName]));
-    } else {
-        alert("This city already in favourites");
-        return;
-    }
-
-    AddCity(cityName);
-}
-
 addNewCityButton.addEventListener("click", () => {
-    CreateCity(inputField.value);
+    AddCity(inputField.value);
     inputField.value = "";
     inputField.focus();
 });
 form.addEventListener("submit", e => {
     e.preventDefault();
-    CreateCity(inputField.value);
+    AddCity(inputField.value);
     inputField.value = "";
     inputField.focus();
 });
 
 UpdateGeolocation();
-if (window.localStorage["favoriteCities"] != null) {
-    JSON.parse(window.localStorage["favoriteCities"]).map(cityName => {
-        AddCity(cityName);
-    });
+if (window.localStorage["userId"] != null) {
+    fetch(`${serverLink}/favorites?userId=${window.localStorage["userId"]}`)
+        .then(res => {
+            return res.json();
+        })
+        .then(data => {
+            JSON.parse(data.cities).map(cityName => {
+                AddCity(cityName, false);
+            });
+        });
 }

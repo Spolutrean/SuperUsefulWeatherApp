@@ -11,7 +11,7 @@ app.use(express.json());
 app.use(cors());
 
 function HandleApiRequest(requestURL, res) {
-    const APIkey = "a4e381df896abd612a5a698a20c835d3";
+    const APIkey = "2da721108308af6a239d2d7112321835";
 
     fetch(`${requestURL}&appid=${APIkey}`)
         .then(response => {
@@ -32,7 +32,6 @@ function HandleApiRequest(requestURL, res) {
 
 
 app.get("/weather/city", (req, res) => {
-    console.log(req.query);
     HandleApiRequest(`https://api.openweathermap.org/data/2.5/weather?q=${req.query.cityName}&units=metric`, res)
 });
 
@@ -55,12 +54,16 @@ app.get("/favorites", (req, res) => {
                     cities.push(city);
                 }
             }
+
+            console.log(`favorites get success: ${cities}`)
+
             res.status(200).send({
                 userId: userId,
                 cities: JSON.stringify(cities)
             });
         })
         .catch(error => {
+            console.log("favorites get fail")
             res.status(500).send("Internal error");
         });
 });
@@ -75,11 +78,13 @@ app.post("/favorites", (req, res) => {
 
     db.one(queryString, [req.body.userId, req.body.cityName])
         .then(data => {
+            console.log(`favorites post success: ${req.body.cityName}`);
             res.status(200).send({
                 userId: data.id
             });
         })
-        .catch(error => {
+        .catch(() => {
+            console.log(`favorites post fail: ${req.body.cityName}`);
             res.status(500).send("This city already in favorites");
         });
 });
@@ -87,9 +92,11 @@ app.post("/favorites", (req, res) => {
 app.delete("/favorites", (req, res) => {
     db.none("DELETE FROM favorites WHERE id = $1 AND city = $2", [req.body.userId, req.body.cityName])
         .then(() => {
+            console.log(`favorites delete success: ${req.body.cityName} for ${req.body.userId}`);
             res.status(200).send();
         })
         .catch(() => {
+            console.log(`favorites delete fail: ${req.body.cityName} for ${req.body.userId}`);
             res.status(500).send("Internal error");
         });
 });
