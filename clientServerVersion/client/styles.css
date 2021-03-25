@@ -232,7 +232,7 @@ main {
 
 @media screen and (max-width: 730px) {
     body {
-        min-width: 320px;
+        min-width: 310px;
         width: 100%;
     }
 
